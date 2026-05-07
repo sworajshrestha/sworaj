@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --color-primary: #ff4500;
+  --color-primary-hover: #e03e00;
+
+  --color-background-dark: #000000;
+  --color-background-light: #ffffff;
+
+  --color-surface-dark: #111111;
+  --color-surface-light: #f3f4f6;
+
+  --color-text-dark: #ffffff;
+  --color-text-light: #111111;
+
+  --color-muted-dark: #9ca3af;
+  --color-muted-light: #4b5563;
+}
+
+:root {
+  --background: var(--color-background-light);
+  --foreground: var(--color-text-light);
+  --muted: var(--color-muted-light);
+  --surface: var(--color-surface-light);
+  --border: rgba(0, 0, 0, 0.1);
+}
+
+:root.dark {
+  --background: var(--color-background-dark);
+  --foreground: var(--color-text-dark);
+  --muted: var(--color-muted-dark);
+  --surface: var(--color-surface-dark);
+  --border: rgba(255, 255, 255, 0.1);
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+@theme {
+  --animate-float: float 10s ease-in-out infinite;
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0) scale(1);
+    }
+    50% {
+      transform: translateY(-20px) scale(1.05);
+    }
+  }
+}
+
+@layer utilities {
+  .glass-nav {
+    @apply backdrop-blur-md bg-white/70 dark:bg-black/70 border-b border-[var(--border)];
+  }
+
+  .card-gradient {
+    @apply bg-gradient-to-br from-[var(--surface)] to-[var(--background)] border border-[var(--border)] shadow-sm;
+  }
+
+  .glow-orb {
+    @apply absolute rounded-full mix-blend-screen filter blur-[100px] opacity-30 pointer-events-none;
+  }
+}
